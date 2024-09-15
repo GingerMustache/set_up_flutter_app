@@ -6,9 +6,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:world_time_bloc/common/application/app_settings.dart';
-import 'package:world_time_bloc/common/constants/constants.dart';
-import 'package:world_time_bloc/common/localization/i18n/strings.g.dart';
+import 'package:app_name/common/application/app_settings.dart';
+import 'package:app_name/common/constants/constants.dart';
+import 'package:app_name/common/localization/i18n/strings.g.dart';
 
 abstract class MyAppNavigation {
   RouterConfig<RouteMatchList> get router;
