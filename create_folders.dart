@@ -32,6 +32,21 @@ void main() {
   // Path to the colors.dart file
   Map<String, String> files = {
     '.env': 'URL=',
+    'slang.yaml': '''
+base_locale: en
+input_file_pattern: .i18n.yaml
+fallback_strategy: base_locale
+input_directory: lib/common/localization/i18n
+''',
+    'flutter_launcher_icons.yaml': '''
+#flutter_icons:
+#android: true
+#ios: true
+#image_path: "assets/images/logo.png"
+#adaptive_icon_foreground: "assets/images/logo.png"
+#adaptive_icon_background: "#5D4CC2"
+#remove_alpha_ios: true
+''',
     'lib/common/application/app_settings.dart': '''
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
