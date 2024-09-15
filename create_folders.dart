@@ -28,17 +28,47 @@ void main() {
       print('Already exists: $folder');
     }
   }
+  final ApplicationContent application = ApplicationContent();
+  final CommonContent common = CommonContent();
 
-  // Path to the colors.dart file
   Map<String, String> files = {
     '.env': 'URL=',
-    'slang.yaml': '''
+    'slang.yaml': common.slang,
+    'flutter_launcher_icons.yaml': common.flutterLauncherIcons,
+
+    //application
+    'lib/common/application/app_settings.dart': application.appSettings,
+    'lib/common/application/colors.dart': application.colors,
+    'lib/common/application/text_styles.dart': application.textStyles,
+    'lib/common/application/links.dart': application.links,
+    'lib/common/application/button_styles.dart': application.part,
+    'lib/common/application/decoration.dart': application.part,
+    'lib/common/application/paddings.dart': application.part,
+  };
+
+  files.map(
+    (key, value) {
+      final file = File(key);
+      if (!file.existsSync()) {
+        file.writeAsStringSync(value);
+        print('Created: $key');
+      } else {
+        print('Already exists: $key');
+      }
+      return MapEntry(key, value);
+    },
+  );
+}
+
+final class CommonContent {
+  String get slang => '''
 base_locale: en
 input_file_pattern: .i18n.yaml
 fallback_strategy: base_locale
 input_directory: lib/common/localization/i18n
-''',
-    'flutter_launcher_icons.yaml': '''
+''';
+
+  String get flutterLauncherIcons => '''
 #flutter_icons:
 #android: true
 #ios: true
@@ -46,8 +76,13 @@ input_directory: lib/common/localization/i18n
 #adaptive_icon_foreground: "assets/images/logo.png"
 #adaptive_icon_background: "#5D4CC2"
 #remove_alpha_ios: true
-''',
-    'lib/common/application/app_settings.dart': '''
+''';
+}
+
+final class ApplicationContent {
+  String get part => 'part of "app_settings.dart";';
+
+  String get appSettings => '''
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -57,8 +92,9 @@ part 'decoration.dart';
 part 'links.dart';
 part 'paddings.dart';
 part 'text_styles.dart';
-''',
-    'lib/common/application/colors.dart': '''
+''';
+
+  String get colors => '''
 part of "app_settings.dart";
 
 class AppColors {
@@ -73,14 +109,9 @@ class AppColors {
   AppColors._sharedInstance();
   factory AppColors() => _shared;
 }
-''',
-    'lib/common/application/button_styles.dart': '''
-part of "app_settings.dart";
-''',
-    'lib/common/application/decoration.dart': '''
-part of "app_settings.dart";
-''',
-    'lib/common/application/links.dart': '''
+''';
+
+  String get links => '''
 part of "app_settings.dart";
 
 
@@ -93,11 +124,9 @@ class BasePaths {
   
   static final base = _base;
 }
-''',
-    'lib/common/application/paddings.dart': '''
-part of "app_settings.dart";
-''',
-    'lib/common/application/text_styles.dart': '''
+''';
+
+  String get textStyles => '''
 part of "app_settings.dart";
 
 final whiteLarge = _getTextStyle(
@@ -194,20 +223,5 @@ TextStyle _getTextStyleFromThema({
     color: color ?? Colors.black,
   );
 }
-
-''',
-  };
-
-  files.map(
-    (key, value) {
-      final file = File(key);
-      if (!file.existsSync()) {
-        file.writeAsStringSync(value);
-        print('Created: $key');
-      } else {
-        print('Already exists: $key');
-      }
-      return MapEntry(key, value);
-    },
-  );
+''';
 }
