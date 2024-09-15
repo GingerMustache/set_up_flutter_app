@@ -1,8 +1,9 @@
 # set_up_flutter_app
 
-## What inside
- - Common folders with default files
-    'lib/common/application',
+## What will be generated
+ - Common folders with default files:
+
+ 'lib/common/application',\n
     'lib/common/constants',
     'lib/common/data/remote',
     'lib/common/localization/i18n',
