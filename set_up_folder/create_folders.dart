@@ -1,22 +1,21 @@
 import 'dart:io';
 
-part 'common_content/common_content.dart';
-part 'common_content/localization_content.dart';
-part 'common_content/constant_content.dart';
 part 'common_content/application_content.dart';
+part 'common_content/common_content.dart';
+part 'common_content/constant_content.dart';
+part 'common_content/localization_content.dart';
+part 'common_content/presentation_content.dart';
 
 void main() {
-  // Define the folder structure
   List<String> folders = [
     '../lib/common/application',
     '../lib/common/constants',
     '../lib/common/data/remote',
     '../lib/common/localization/i18n',
-    '../lib/common/presentation',
+    '../lib/common/presentation/widgets/app',
     '../lib/common/routing',
     '../lib/common/services/di_container',
     '../lib/common/typography',
-    '../lib/feature/first',
     '../lib/feature/first/bloc',
     '../lib/feature/first/constants',
     '../lib/feature/first/data',
@@ -33,10 +32,12 @@ void main() {
       print('Already exists: $folder');
     }
   }
+
   final ApplicationContent application = ApplicationContent();
   final CommonContent common = CommonContent();
   final ConstantsContent constants = ConstantsContent();
   final LocalizationContent localization = LocalizationContent();
+  final PresentationContent presentation = PresentationContent();
 
   Map<String, String> files = {
     // common
@@ -61,6 +62,9 @@ void main() {
 
     // localization
     '../lib/common/localization/i18n/strings_en.i18n.yaml': localization.string,
+
+    // presentation
+    '../lib/common/presentation/widgets/app/my_app.dart': presentation.app,
   };
 
   files.map(
