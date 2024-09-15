@@ -2,20 +2,21 @@
 
 ## What will be generated
  - Common folders with default files:
-
+<pre>
  lib/common/application<br>
             /constants<br>
             /remote'<br>
-    'lib/common/localization/i18n',
-    'lib/common/presentation',
-    'lib/common/routing',
-    'lib/common/services/di_container',
-    'lib/common/typography',
-    'lib/feature/first',
-    'lib/feature/first/bloc',
-    'lib/feature/first/constants',
-    'lib/feature/first/data',
-    'lib/feature/first/presentation',
+            /localization/i18n<br>,
+            /presentation<br>
+            /routing<br>
+            /services/di_container<br>
+            /typography<br>
+    /feature/first<br>
+                    /bloc<br>
+                    /constants<br>
+                    /data<br>
+                    /presentation<br>
+</pre>
 
 ## What need make first
 ```
