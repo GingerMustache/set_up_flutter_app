@@ -3,9 +3,9 @@
 ## What will be generated
  - Common folders with default files:
 
- 'lib/common/application',\n
-    'lib/common/constants',
-    'lib/common/data/remote',
+ lib/common/application<br>
+            /constants<br>
+            /remote'<br>
     'lib/common/localization/i18n',
     'lib/common/presentation',
     'lib/common/routing',
