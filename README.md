@@ -24,6 +24,8 @@ dev:flutter_lints
 
 ## What will be generated
 - .env
+- slang.yaml
+- flutter_launcher_icons.yaml
 - Common folders with default files:
 <pre>
  lib/common/application<br>
@@ -41,7 +43,3 @@ dev:flutter_lints
                 /presentation<br>
 </pre>
 
-## What need make first
-```
-flutter pub add 
-```
