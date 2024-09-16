@@ -1,5 +1,14 @@
 # set_up_flutter_app
 
+## Start use use
+- add folder set_up_folder to main dir
+- delete main.dart, .gitignore
+- add packages ([Add packages](#add-packages))
+- run create_folder.dart file
+```
+dart run create_folder.dart
+```
+
 ## Add packages
 - run in terminal
 ```
@@ -10,7 +19,8 @@ or
 
 ```
 flutter pub add 
-flutter_localizations 
+flutter_localizations --sdk=flutter
+intl:any
 slang 
 slang_flutter 
 go_router 
@@ -32,6 +42,8 @@ dev:flutter_lints
 ## What will be generated
 - .env
 - slang.yaml
+- .gitignore
+- main.dart
 - flutter_launcher_icons.yaml
 - Common folders with default files:
 <pre>
@@ -47,6 +59,10 @@ dev:flutter_lints
                 /bloc<br>
                 /constants<br>
                 /data<br>
+                        /models<br>
+                        /providers<br>
                 /presentation<br>
+                        /screen<br>
+                        /parts<br>
 </pre>
 
