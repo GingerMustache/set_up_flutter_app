@@ -7,8 +7,8 @@ part 'common_content/constant_content.dart';
 part 'common_content/localization_content.dart';
 part 'common_content/presentation_content.dart';
 part 'common_content/routing_content.dart';
-part 'common_content/services_content.dart';
 part 'common_content/screens_content.dart';
+part 'common_content/services_content.dart';
 
 Future<String> getAppName() async {
   final File pubspecFile = File('../pubspec.yaml');
@@ -77,9 +77,9 @@ void main() async {
     // common
     '../.env': 'URL=',
     '../slang.yaml': common.slang,
+    '../.gitignore': common.gitignore,
     '../flutter_launcher_icons.yaml': common.flutterLauncherIcons,
     '../lib/main.dart': common.main(appName),
-    '../lib/.gitignore': common.gitignore,
 
     // application
     '../lib/common/application/app_settings.dart': application.appSettings,

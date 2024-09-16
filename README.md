@@ -1,6 +1,13 @@
 # set_up_flutter_app
 
 ## Add packages
+- run in terminal
+```
+chmod +x run_pub_add.sh
+sh run_pub_add.sh
+```
+or 
+
 ```
 flutter pub add 
 flutter_localizations 
