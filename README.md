@@ -1,6 +1,9 @@
 # set_up_flutter_app
+1.[How to use](#how-to-use)
+2.[Add packages](#add-packages)
+3.[What will be generated](#what-will-be-generated)
 
-## Start use use
+## How to use
 - add folder set_up_folder to main dir
 - delete main.dart, .gitignore
 - add packages ([Add packages](#add-packages))
