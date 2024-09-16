@@ -111,9 +111,11 @@ void main() async {
     // typography
     '../lib/common/typography/typography.dart': '',
 
-    // typography
+    // screens
     '../lib/feature/first/presentation/screens/home_screen.dart':
         screens.homeScreen,
+    '../lib/feature/first/presentation/screens/init_screen.dart':
+        screens.initScreen(appName),
   };
 
   files.map(
