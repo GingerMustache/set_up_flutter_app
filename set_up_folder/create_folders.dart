@@ -6,6 +6,7 @@ part 'common_content/common_content.dart';
 part 'common_content/constant_content.dart';
 part 'common_content/localization_content.dart';
 part 'common_content/presentation_content.dart';
+part 'common_content/routing_content.dart';
 
 Future<String> getAppName() async {
   final File pubspecFile = File('../pubspec.yaml');
@@ -64,6 +65,7 @@ void main() async {
   final ConstantsContent constants = ConstantsContent();
   final LocalizationContent localization = LocalizationContent();
   final PresentationContent presentation = PresentationContent();
+  final RoutingContent routing = RoutingContent();
 
   Map<String, String> files = {
     // common
@@ -92,6 +94,9 @@ void main() async {
     // presentation
     '../lib/common/presentation/widgets/app/my_app.dart':
         presentation.app(appName),
+
+    // routing
+    '../lib/common/routing/routes.dart': routing.routes(appName),
   };
 
   files.map(
