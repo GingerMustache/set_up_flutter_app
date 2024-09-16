@@ -1,14 +1,14 @@
 part of '../create_folders.dart';
 
 final class PresentationContent {
-  String get app => '''
+  String app(String appName) => '''
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:app_name/common/application/app_settings.dart';
-import 'package:app_name/common/constants/constants.dart';
-import 'package:app_name/common/localization/i18n/strings.g.dart';
+import 'package:$appName/common/application/app_settings.dart';
+import 'package:$appName/common/constants/constants.dart';
+import 'package:$appName/common/localization/i18n/strings.g.dart';
 
 abstract class MyAppNavigation {
   RouterConfig<RouteMatchList> get router;

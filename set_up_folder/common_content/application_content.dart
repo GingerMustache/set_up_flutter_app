@@ -34,8 +34,7 @@ class AppColors {
   String get links => '''
 part of "app_settings.dart";
 
-//add dollar sign
-String _base = '{dotenv.env['URL']}';
+String _base = '\${dotenv.env['URL']}';
 
 class BasePaths {
   static final base = _base;
