@@ -1,7 +1,7 @@
 # set_up_flutter_app
-1.[How to use](#how-to-use)
-2.[Add packages](#add-packages)
-3.[What will be generated](#what-will-be-generated)
+1.[How to use](#how-to-use)<br>
+2.[Add packages](#add-packages)<br>
+3.[What will be generated](#what-will-be-generated)<br>
 
 ## How to use
 - add folder set_up_folder to main dir
