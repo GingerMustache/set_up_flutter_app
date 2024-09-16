@@ -7,6 +7,7 @@ part 'common_content/constant_content.dart';
 part 'common_content/localization_content.dart';
 part 'common_content/presentation_content.dart';
 part 'common_content/routing_content.dart';
+part 'common_content/services_content.dart';
 
 Future<String> getAppName() async {
   final File pubspecFile = File('../pubspec.yaml');
@@ -45,8 +46,10 @@ void main() async {
     '../lib/common/typography',
     '../lib/feature/first/bloc',
     '../lib/feature/first/constants',
-    '../lib/feature/first/data',
-    '../lib/feature/first/presentation',
+    '../lib/feature/first/data/models',
+    '../lib/feature/first/data/providers',
+    '../lib/feature/first/presentation/parts',
+    '../lib/feature/first/presentation/screens',
   ];
 
   for (var folder in folders) {
@@ -66,6 +69,7 @@ void main() async {
   final LocalizationContent localization = LocalizationContent();
   final PresentationContent presentation = PresentationContent();
   final RoutingContent routing = RoutingContent();
+  final ServicesContent services = ServicesContent();
 
   Map<String, String> files = {
     // common
@@ -97,6 +101,13 @@ void main() async {
 
     // routing
     '../lib/common/routing/routes.dart': routing.routes(appName),
+
+    // services
+    '../lib/common/services/di_container/di_container.dart':
+        services.di(appName),
+
+    // typography
+    '../lib/common/typography/typography.dart': '',
   };
 
   files.map(
