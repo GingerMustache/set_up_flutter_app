@@ -11,7 +11,7 @@ part 'common_content/screens_content.dart';
 part 'common_content/services_content.dart';
 
 Future<String> getAppName() async {
-  final File pubspecFile = File('../pubspec.yaml');
+  final File pubspecFile = File('../../pubspec.yaml');
 
   if (await pubspecFile.exists()) {
     final String pubspecContent = await pubspecFile.readAsString();
@@ -37,20 +37,20 @@ void main() async {
   final String appName = await getAppName();
 
   List<String> folders = [
-    '../lib/common/application',
-    '../lib/common/constants',
-    '../lib/common/data/remote',
-    '../lib/common/localization/i18n',
-    '../lib/common/presentation/widgets/app',
-    '../lib/common/routing',
-    '../lib/common/services/di_container',
-    '../lib/common/typography',
-    '../lib/feature/first/bloc',
-    '../lib/feature/first/constants',
-    '../lib/feature/first/data/models',
-    '../lib/feature/first/data/providers',
-    '../lib/feature/first/presentation/parts',
-    '../lib/feature/first/presentation/screens',
+    '../../lib/common/application',
+    '../../lib/common/constants',
+    '../../lib/common/data/remote',
+    '../../lib/common/localization/i18n',
+    '../../lib/common/presentation/widgets/app',
+    '../../lib/common/routing',
+    '../../lib/common/services/di_container',
+    '../../lib/common/typography',
+    '../../lib/features/first/bloc',
+    '../../lib/features/first/constants',
+    '../../lib/features/first/data/models',
+    '../../lib/features/first/data/providers',
+    '../../lib/features/first/presentation/parts',
+    '../../lib/features/first/presentation/screens',
   ];
 
   for (var folder in folders) {
@@ -75,48 +75,49 @@ void main() async {
 
   Map<String, String> files = {
     // common
-    '../.env': 'URL=',
-    '../slang.yaml': common.slang,
-    '../.gitignore': common.gitignore,
-    '../flutter_launcher_icons.yaml': common.flutterLauncherIcons,
-    '../lib/main.dart': common.main(appName),
+    '../../.env': 'URL=',
+    '../../slang.yaml': common.slang,
+    '../../.gitignore': common.gitignore,
+    '../../flutter_launcher_icons.yaml': common.flutterLauncherIcons,
+    '../../lib/main.dart': common.main(appName),
 
     // application
-    '../lib/common/application/app_settings.dart': application.appSettings,
-    '../lib/common/application/colors.dart': application.colors,
-    '../lib/common/application/text_styles.dart': application.textStyles,
-    '../lib/common/application/links.dart': application.links,
-    '../lib/common/application/button_styles.dart': application.part,
-    '../lib/common/application/decoration.dart': application.part,
-    '../lib/common/application/paddings.dart': application.part,
+    '../../lib/common/application/app_settings.dart': application.appSettings,
+    '../../lib/common/application/colors.dart': application.colors,
+    '../../lib/common/application/text_styles.dart': application.textStyles,
+    '../../lib/common/application/links.dart': application.links,
+    '../../lib/common/application/button_styles.dart': application.part,
+    '../../lib/common/application/decoration.dart': application.part,
+    '../../lib/common/application/paddings.dart': application.part,
 
     // constants
-    '../lib/common/constants/constants.dart': constants.constants,
-    '../lib/common/constants/global.dart': constants.global,
-    '../lib/common/constants/snacks.dart': constants.snacks,
-    '../lib/common/constants/spaces.dart': constants.spaces,
+    '../../lib/common/constants/constants.dart': constants.constants,
+    '../../lib/common/constants/global.dart': constants.global,
+    '../../lib/common/constants/snacks.dart': constants.snacks,
+    '../../lib/common/constants/spaces.dart': constants.spaces,
 
     // localization
-    '../lib/common/localization/i18n/strings_en.i18n.yaml': localization.string,
+    '../../lib/common/localization/i18n/strings_en.i18n.yaml':
+        localization.string,
 
     // presentation
-    '../lib/common/presentation/widgets/app/my_app.dart':
+    '../../lib/common/presentation/widgets/app/my_app.dart':
         presentation.app(appName),
 
     // routing
-    '../lib/common/routing/routes.dart': routing.routes(appName),
+    '../../lib/common/routing/routes.dart': routing.routes(appName),
 
     // services
-    '../lib/common/services/di_container/di_container.dart':
+    '../../lib/common/services/di_container/di_container.dart':
         services.di(appName),
 
     // typography
-    '../lib/common/typography/typography.dart': '',
+    '../../lib/common/typography/typography.dart': '',
 
     // screens
-    '../lib/feature/first/presentation/screens/home_screen.dart':
+    '../../lib/features/first/presentation/screens/home_screen.dart':
         screens.homeScreen,
-    '../lib/feature/first/presentation/screens/init_screen.dart':
+    '../../lib/features/first/presentation/screens/init_screen.dart':
         screens.initScreen(appName),
   };
 
