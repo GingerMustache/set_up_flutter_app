@@ -1,7 +1,12 @@
 # set_up_flutter_app
-1.[How to use](#how-to-use)<br>
-2.[Add packages](#add-packages)<br>
-3.[What will be generated](#what-will-be-generated)<br>
+1.[How to use](#how-to-use)
+<br>
+
+2.[Add packages](#add-packages)
+<br>
+
+3.[What will be generated](#what-will-be-generated)
+
 
 ## How to use
 - add folder set_up_folder to main dir
@@ -68,4 +73,30 @@ dev:flutter_lints
                         /screen<br>
                         /parts<br>
 </pre>
+<br>
 
+## Probably errors
+- in case
+```
+* What went wrong:
+Execution failed for task ':app:checkDebugDuplicateClasses'.
+```
+1. Go to settings.gradle
+2. Change first case to second
+
+```Groovy
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    id "com.android.application" version "7.3.0" apply false
+    id "org.jetbrains.kotlin.android" version "1.7.10" apply false
+}
+```
+<br>
+
+``` Groovy
+plugins {
+    id "dev.flutter.flutter-plugin-loader" version "1.0.0"
+    id "com.android.application" version "7.3.0" apply false
+    id "org.jetbrains.kotlin.android" version "1.8.22" apply false
+}
+```

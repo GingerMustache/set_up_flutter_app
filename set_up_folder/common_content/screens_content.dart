@@ -57,6 +57,11 @@ abstract interface class CheckAuthorization {
   Future<bool> isAuth();
 }
 
+class CheckAuthorizationDefault implements CheckAuthorization {
+  @override
+  Future<bool> isAuth() async => true;
+}
+
 class InitScreen extends StatefulWidget {
   const InitScreen({super.key, required this.checkAuthorization});
   final CheckAuthorization checkAuthorization;

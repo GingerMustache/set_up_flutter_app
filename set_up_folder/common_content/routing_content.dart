@@ -10,7 +10,6 @@ import 'package:gemini_chat_bloc/common/services/di_container/di_container.dart'
 import 'package:gemini_chat_bloc/features/first/bloc/init_screen_bloc.dart';
 import 'package:gemini_chat_bloc/features/first/presentation/screens/home_screen.dart';
 import 'package:gemini_chat_bloc/features/first/presentation/screens/init_screen.dart';
-import 'package:gemini_chat_bloc/features/first/presentation/screens/init_screen.dart';
 import 'package:go_router/go_router.dart';
 
 enum MainRoutes { home, init }
