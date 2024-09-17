@@ -5,7 +5,7 @@ final class ServicesContent {
 import 'package:flutter/material.dart';
 import 'package:$appName/common/presentation/widgets/app/my_app.dart';
 import 'package:$appName/common/routing/routes.dart';
-import 'package:$appName/feature/first/presentation/screens/init_screen.dart';
+import 'package:$appName/features/first/presentation/screens/init_screen.dart';
 
 abstract class DiContainerProvider {
   Widget makeApp();

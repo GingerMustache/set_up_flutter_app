@@ -54,11 +54,11 @@ dev:flutter_lints
             /constants<br>
             /remote<br>
             /localization/i18n<br>
-            /presentation<br>
+            /presentation<br>w
             /routing<br>
             /services/di_container<br>
             /typography<br>
-    /feature/first<br>
+    /features/first<br>
                 /bloc<br>
                 /constants<br>
                 /data<br>

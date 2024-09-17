@@ -8,7 +8,9 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
 import 'package:$appName/common/application/app_settings.dart';
 import 'package:$appName/common/constants/constants.dart';
-// need to run dart run build_runner build
+// need to run 
+// dart run build_runner build
+// dart run slang
 import 'package:$appName/common/localization/i18n/strings.g.dart';
 
 abstract class MyAppNavigation {

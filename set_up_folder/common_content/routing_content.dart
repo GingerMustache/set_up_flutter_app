@@ -7,9 +7,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:$appName/common/constants/constants.dart';
 import 'package:$appName/common/presentation/widgets/app/my_app.dart';
 import 'package:$appName/common/services/di_container/di_container.dart';
-import 'package:$appName/feature/first/bloc/bloc/init_screen_bloc.dart';
-import 'package:$appName/feature/first/presentation/screens/home_screen.dart';
-import 'package:$appName/feature/first/presentation/screens/init_screen.dart';
+import 'package:$appName/features/first/bloc/bloc/init_screen_bloc.dart';
+import 'package:$appName/features/first/presentation/screens/home_screen.dart';
+import 'package:$appName/features/first/presentation/screens/init_screen.dart';
 import 'package:go_router/go_router.dart';
 
 enum MainRoutes { home, init }
