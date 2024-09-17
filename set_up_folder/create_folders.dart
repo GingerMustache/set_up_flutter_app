@@ -77,9 +77,9 @@ void main() async {
     // common
     '../../.env': 'URL=',
     '../../slang.yaml': common.slang,
-    // '../../.gitignore': common.gitignore,
+    '../../.gitignore': common.gitignore,
     '../../flutter_launcher_icons.yaml': common.flutterLauncherIcons,
-    // '../../lib/main.dart': common.main(appName),
+    '../../lib/main.dart': common.main(appName),
 
     // application
     '../../lib/common/application/app_settings.dart': application.appSettings,
