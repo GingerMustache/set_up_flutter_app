@@ -5,18 +5,23 @@ final class ServicesContent {
 import 'package:flutter/material.dart';
 import 'package:$appName/common/presentation/widgets/app/my_app.dart';
 import 'package:$appName/common/routing/routes.dart';
+import 'package:$appName/feature/first/presentation/screens/init_screen.dart';
 
 abstract class DiContainerProvider {
   Widget makeApp();
 }
 
 class DiContainer implements DiContainerProvider {
-  final MainNavigation _mainNavigation = MainNavigation();
+  ScreenFactory _makeScreenFactory() => ScreenFactory(diContainer: this);
+  MyAppNavigation _makeRouter() =>
+      MainNavigation(screenFactory: _makeScreenFactory());
 
   @override
-  Widget makeApp() => MyApp(navigation: _mainNavigation);
+  Widget makeApp() => MyApp(navigation: _makeRouter());
+  CheckAuthorization makeCheckAuthorization() => CheckAuthorizationDefault();
 
   DiContainer();
 }
+
 ''';
 }

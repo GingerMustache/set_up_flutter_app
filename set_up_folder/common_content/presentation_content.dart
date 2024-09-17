@@ -12,7 +12,7 @@ import 'package:$appName/common/constants/constants.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';
 
 abstract class MyAppNavigation {
-  RouterConfig<RouteMatchList> get router;
+  RouterConfig<RouteMatchList> router();
 }
 
 class MyApp extends StatelessWidget {
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
           color: AppColors.mainBlack,
         ),
       ),
-      routerConfig: navigation.router,
+      routerConfig: navigation.router(),
       locale: TranslationProvider.of(context).flutterLocale,
       supportedLocales: AppLocaleUtils.supportedLocales,
       localizationsDelegates: GlobalMaterialLocalizations.delegates,
