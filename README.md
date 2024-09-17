@@ -59,7 +59,7 @@ dev:flutter_lints
             /constants<br>
             /remote<br>
             /localization/i18n<br>
-            /presentation<br>w
+            /presentation<br>
             /routing<br>
             /services/di_container<br>
             /typography<br>
@@ -82,7 +82,7 @@ dev:flutter_lints
 Execution failed for task ':app:checkDebugDuplicateClasses'.
 ```
 1. Go to settings.gradle
-2. Change first case to second
+2. Change current line from:
 
 ```Groovy
 plugins {
@@ -91,6 +91,10 @@ plugins {
     id "org.jetbrains.kotlin.android" version "1.7.10" apply false
 }
 ```
+<br>
+
+to this :
+
 <br>
 
 ``` Groovy
