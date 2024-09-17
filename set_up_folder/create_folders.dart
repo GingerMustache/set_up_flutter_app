@@ -114,9 +114,15 @@ void main() async {
     // typography
     '../../lib/common/typography/typography.dart': '',
 
-    // screens
+    // screens/presentation
     '../../lib/features/first/presentation/screens/home_screen.dart':
         screens.homeScreen,
+
+    // screens/bloc
+    '../../lib/features/first/bloc/init_screen_bloc.dart': screens.bloc,
+    '../../lib/features/first/bloc/init_screen_event.dart': screens.event,
+    '../../lib/features/first/bloc/init_screen_state.dart': screens.state,
+
     '../../lib/features/first/presentation/screens/init_screen.dart':
         screens.initScreen(appName),
   };

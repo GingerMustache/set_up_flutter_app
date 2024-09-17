@@ -1,6 +1,38 @@
 part of '../create_folders.dart';
 
 final class ScreensContent {
+  String get event => '''
+part of 'init_screen_bloc.dart';
+
+@immutable
+sealed class InitScreenEvent {}
+
+''';
+
+  String get state => '''
+part of 'init_screen_bloc.dart';
+
+@immutable
+sealed class InitScreenState {}
+
+final class InitScreenInitial extends InitScreenState {}
+''';
+
+  String get bloc => '''
+import 'package:bloc/bloc.dart';
+import 'package:meta/meta.dart';
+
+part 'init_screen_event.dart';
+part 'init_screen_state.dart';
+
+class InitScreenBloc extends Bloc<InitScreenEvent, InitScreenState> {
+  InitScreenBloc() : super(InitScreenInitial()) {
+    on<InitScreenEvent>((event, emit) {
+    });
+  }
+}
+''';
+
   String get homeScreen => '''
 import 'package:flutter/material.dart';
 

@@ -4,12 +4,13 @@ final class RoutingContent {
   String routes(String appName) => '''
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:$appName/common/constants/constants.dart';
-import 'package:$appName/common/presentation/widgets/app/my_app.dart';
-import 'package:$appName/common/services/di_container/di_container.dart';
-import 'package:$appName/features/first/bloc/bloc/init_screen_bloc.dart';
-import 'package:$appName/features/first/presentation/screens/home_screen.dart';
-import 'package:$appName/features/first/presentation/screens/init_screen.dart';
+import 'package:gemini_chat_bloc/common/constants/constants.dart';
+import 'package:gemini_chat_bloc/common/presentation/widgets/app/my_app.dart';
+import 'package:gemini_chat_bloc/common/services/di_container/di_container.dart';
+import 'package:gemini_chat_bloc/features/first/bloc/init_screen_bloc.dart';
+import 'package:gemini_chat_bloc/features/first/presentation/screens/home_screen.dart';
+import 'package:gemini_chat_bloc/features/first/presentation/screens/init_screen.dart';
+import 'package:gemini_chat_bloc/features/first/presentation/screens/init_screen.dart';
 import 'package:go_router/go_router.dart';
 
 enum MainRoutes { home, init }
