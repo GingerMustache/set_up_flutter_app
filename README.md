@@ -14,7 +14,7 @@
 - add packages ([Add packages](#add-packages))
 - run create_folder.dart file
 ```
-dart run create_folder.dart
+dart run create_folders.dart
 ```
 
 ## Add packages
