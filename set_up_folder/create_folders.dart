@@ -63,6 +63,7 @@ void main() async {
     '../../lib/features/first/data/providers',
     '../../lib/features/first/presentation/parts',
     '../../lib/features/first/presentation/screens',
+    '../../lib/features/settings/bloc',
   ];
 
   for (var folder in folders) {
@@ -171,6 +172,14 @@ void main() async {
 
     '../../lib/features/first/presentation/screens/init_screen.dart':
         screens.initScreen(appName),
+
+    // settings/bloc
+    '../../lib/features/settings/bloc/settings_bloc.dart':
+        screens.settingsBloc(appName),
+    '../../lib/features/settings/bloc/settings_event.dart':
+        screens.settingsEvent,
+    '../../lib/features/settings/bloc/settings_state.dart':
+        screens.settingsState,
   };
 
   files.map(
