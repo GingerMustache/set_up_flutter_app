@@ -20,6 +20,7 @@
   rxdart \
   sentry_flutter \
   file_picker \
+  flutter_i18n \
   dev:build_runner \
   dev:flutter_launcher_icons \
   dev:flutter_native_splash \

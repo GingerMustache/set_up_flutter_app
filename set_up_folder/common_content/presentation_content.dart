@@ -2,16 +2,22 @@ part of '../create_folders.dart';
 
 final class PresentationContent {
   String app(String appName) => '''
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:go_router/go_router.dart';
 import 'package:$appName/common/application/app_settings.dart';
 import 'package:$appName/common/constants/constants.dart';
-// need to run 
+// need to run
 // dart run build_runner build
 // dart run slang
 import 'package:$appName/common/localization/i18n/strings.g.dart';
+import 'package:$appName/common/presentation/widgets/app/themes/base_theme.dart';
+import 'package:$appName/features/settings/bloc/settings_bloc.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_i18n/flutter_i18n.dart'
+    show FlutterI18n, FlutterI18nDelegate;
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:go_router/go_router.dart';
+import 'package:multi_mode_animated_snack/multi_mode_animated_snack.dart';
 
 abstract class MyAppNavigation {
   RouterConfig<RouteMatchList> router();
@@ -19,36 +25,77 @@ abstract class MyAppNavigation {
 
 class MyApp extends StatelessWidget {
   final MyAppNavigation navigation;
+  final FlutterI18nDelegate flutterI18nDelegate;
 
   const MyApp({
-    Key? key,
+    super.key,
     required this.navigation,
-  }) : super(key: key);
+    required this.flutterI18nDelegate,
+  });
+
+  void systemColor(ThemeMode theme) {
+    final isDark = theme == ThemeMode.dark;
+
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        statusBarColor: isDark ? AppColors.mainBlack : AppColors.mainWhite,
+        statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
+        statusBarBrightness: isDark ? Brightness.light : Brightness.dark,
+        systemNavigationBarIconBrightness:
+            isDark ? Brightness.light : Brightness.dark,
+        systemNavigationBarColor:
+            isDark ? AppColors.mainBlack : AppColors.mainWhite,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.dark,
-      statusBarBrightness: Brightness.dark,
-    ));
-    return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
-      scaffoldMessengerKey: snackbarKey,
-      theme: ThemeData(
-        useMaterial3: true,
-        indicatorColor: AppColors.mainBlack,
-        iconTheme: const IconThemeData(
-          color: AppColors.mainBlack,
-        ),
-      ),
-      routerConfig: navigation.router(),
-      locale: TranslationProvider.of(context).flutterLocale,
-      supportedLocales: AppLocaleUtils.supportedLocales,
-      localizationsDelegates: GlobalMaterialLocalizations.delegates,
+    // if (kDebugMode) debugPrintRebuildDirtyWidgets = true;
+
+    return BlocBuilder<SettingsBloc, SettingsState>(
+      buildWhen: (previous, current) => previous.theme != current.theme,
+      builder: (context, state) {
+        systemColor(state.theme);
+
+        return MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          scaffoldMessengerKey: snackbarKey,
+          theme: AppTheme.lightTheme,
+          darkTheme: AppTheme.darkTheme,
+          themeMode: state.theme,
+          routerConfig: navigation.router(),
+          locale: TranslationProvider.of(context).flutterLocale,
+          builder: (context, child) {
+            FlutterI18n.rootAppBuilder();
+            return Overlay(
+              initialEntries: [
+                OverlayEntry(
+                  builder: (context) {
+                    AnimatedSnackBar.initialize(
+                      context,
+                      appearanceMode: AppearanceMode.top,
+                    );
+                    return child!;
+                  },
+                ),
+              ],
+            );
+          },
+
+          localizationsDelegates: [
+            flutterI18nDelegate,
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [Locale('ru'), Locale('en')],
+        );
+      },
     );
   }
 }
+
 ''';
 
   String get appIcons => '''class AppIcons {
@@ -76,7 +123,8 @@ class MyApp extends StatelessWidget {
 }
 ''';
 
-  String lightTheme(String appName) => '''import 'package:$appName/common/application/app_settings.dart';
+  String lightTheme(String appName) =>
+      '''import 'package:$appName/common/application/app_settings.dart';
 import 'package:flutter/material.dart';
 
 TextStyle _getTextStyleFromTheme({
@@ -174,7 +222,8 @@ final ThemeData lightTheme = ThemeData(
 );
 ''';
 
-  String darkTheme(String appName) => '''import 'package:$appName/common/application/app_settings.dart';
+  String darkTheme(String appName) =>
+      '''import 'package:$appName/common/application/app_settings.dart';
 import 'package:flutter/material.dart';
 
 TextStyle _getTextStyleFromTheme({
@@ -267,7 +316,8 @@ final ThemeData darkTheme = ThemeData(
 );
 ''';
 
-  String baseTheme(String appName) => '''import 'package:$appName/common/presentation/widgets/themes/dark_theme.dart';
+  String baseTheme(String appName) =>
+      '''import 'package:$appName/common/presentation/widgets/themes/dark_theme.dart';
 import 'package:$appName/common/presentation/widgets/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 

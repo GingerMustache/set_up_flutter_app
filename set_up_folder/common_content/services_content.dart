@@ -8,16 +8,22 @@ import 'package:$appName/common/routing/routes.dart';
 import 'package:$appName/features/first/presentation/screens/init_screen.dart';
 
 abstract class DiContainerProvider {
-  Widget makeApp();
+  Widget makeApp(FlutterI18nDelegate flutterI18nDelegate);
+  TextValidatorService makeTextValidatorService();
 }
 
 class DiContainer implements DiContainerProvider {
   ScreenFactory _makeScreenFactory() => ScreenFactory(diContainer: this);
   MyAppNavigation _makeRouter() =>
       MainNavigation(screenFactory: _makeScreenFactory());
-
+  
   @override
-  Widget makeApp() => MyApp(navigation: _makeRouter());
+  TextValidatorService makeTextValidatorService() => TextValidatorService();
+  @override
+  Widget makeApp(FlutterI18nDelegate flutterI18nDelegate) => MyApp(
+    navigation: _makeRouter(),
+    flutterI18nDelegate: flutterI18nDelegate,
+  );
   CheckAuthorization makeCheckAuthorization() => CheckAuthorizationDefault();
 
   DiContainer();
@@ -166,7 +172,8 @@ final class NetFilePickServiceImpl implements FilePickService {
 class FilePickException implements FilePickServiceExceptions {}
 ''';
 
-  String get secureStorage => '''import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+  String get secureStorage =>
+      '''import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 enum StorageError { secureStorageError }
 
