@@ -21,6 +21,7 @@
   sentry_flutter \
   file_picker \
   flutter_i18n \
+  multi_mode_animated_snack \
   dev:build_runner \
   dev:flutter_launcher_icons \
   dev:flutter_native_splash \

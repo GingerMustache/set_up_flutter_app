@@ -8,8 +8,10 @@ import 'package:$appName/common/constants/constants.dart';
 // dart run build_runner build
 // dart run slang
 import 'package:$appName/common/localization/i18n/strings.g.dart';
-import 'package:$appName/common/presentation/widgets/app/themes/base_theme.dart';
-import 'package:$appName/features/settings/bloc/settings_bloc.dart';
+
+import 'package:$appName/common/presentation/widgets/themes/base_theme.dart'
+    show AppTheme;
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,7 +19,6 @@ import 'package:flutter_i18n/flutter_i18n.dart'
     show FlutterI18n, FlutterI18nDelegate;
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:go_router/go_router.dart';
-import 'package:multi_mode_animated_snack/multi_mode_animated_snack.dart';
 
 abstract class MyAppNavigation {
   RouterConfig<RouteMatchList> router();
