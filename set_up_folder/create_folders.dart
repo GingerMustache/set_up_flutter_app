@@ -125,7 +125,8 @@ void main() async {
         mixins.eventTransformerMixin,
 
     // localization
-    '../../lib/common/localization/i18n/en.i18n.yaml': localization.string,
+    '../../lib/common/localization/i18n/en.i18n.yaml': localization.stringEn,
+    '../../lib/common/localization/i18n/ru.i18n.yaml': localization.stringRu,
     '../../lib/common/localization/locale/locale.dart':
         localization.locale(appName),
 

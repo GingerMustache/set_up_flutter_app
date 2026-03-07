@@ -1,7 +1,7 @@
 part of '../create_folders.dart';
 
 final class LocalizationContent {
-  String get string => '''
+  String get stringEn => '''
 title: title
 
 ## ==== Экраны ====
@@ -11,6 +11,17 @@ screen:
     all: all
   firstSCreen:
     all: first
+''';
+  String get stringRu => '''
+title: title
+
+## ==== Экраны ====
+
+screen:
+  home:
+    all: всу
+  firstSCreen:
+    all: первый
 ''';
 
   String locale(String appName) => '''import 'dart:ui';
