@@ -8,9 +8,9 @@ setup:
 	@cd set_up_folder && sh run_pub_add.sh
 	@cd set_up_folder && dart run create_folders.dart
 	@echo "Running build_runner..."
-	@dart run build_runner build --delete-conflicting-outputs
+	@cd .. && dart run build_runner build --delete-conflicting-outputs
 	@echo "Generating translations..."
-	@dart run slang
+	@cd .. && dart run slang
 	@echo "Setup complete!"
 
 install:
