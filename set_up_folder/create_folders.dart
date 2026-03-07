@@ -4,7 +4,9 @@ import 'dart:io';
 part 'common_content/application_content.dart';
 part 'common_content/common_content.dart';
 part 'common_content/constant_content.dart';
+part 'common_content/extensions_content.dart';
 part 'common_content/localization_content.dart';
+part 'common_content/mixins_content.dart';
 part 'common_content/presentation_content.dart';
 part 'common_content/routing_content.dart';
 part 'common_content/screens_content.dart';
@@ -40,8 +42,12 @@ void main() async {
     '../../lib/common/application',
     '../../lib/common/constants',
     '../../lib/common/data/remote',
+    '../../lib/common/extensions',
     '../../lib/common/localization/i18n',
+    '../../lib/common/mixins',
     '../../lib/common/presentation/widgets/app',
+    '../../lib/common/presentation/widgets/themes',
+    '../../lib/common/presentation/assets_parts/',
     '../../lib/common/routing',
     '../../lib/common/services/di_container',
     '../../lib/common/typography',
@@ -67,7 +73,9 @@ void main() async {
   final ApplicationContent application = ApplicationContent();
   final CommonContent common = CommonContent();
   final ConstantsContent constants = ConstantsContent();
+  final ExtensionsContent extensions = ExtensionsContent();
   final LocalizationContent localization = LocalizationContent();
+  final MixinsContent mixins = MixinsContent();
   final PresentationContent presentation = PresentationContent();
   final RoutingContent routing = RoutingContent();
   final ServicesContent services = ServicesContent();
@@ -96,6 +104,15 @@ void main() async {
     '../../lib/common/constants/snacks.dart': constants.snacks,
     '../../lib/common/constants/spaces.dart': constants.spaces,
 
+    // extensions
+    '../../lib/common/extensions/app_extensions.dart': extensions.appExtensions,
+
+    // mixins
+    '../../lib/common/mixins/error_handler_mixin.dart':
+        mixins.errorHandlerMixin(appName),
+    '../../lib/common/mixins/event_transformer_mixin.dart':
+        mixins.eventTransformerMixin,
+
     // localization
     '../../lib/common/localization/i18n/strings_en.i18n.yaml':
         localization.string,
@@ -103,6 +120,14 @@ void main() async {
     // presentation
     '../../lib/common/presentation/widgets/app/my_app.dart':
         presentation.app(appName),
+    '../../lib/common/presentation/widgets/themes/light_theme.dart':
+        presentation.lightTheme(appName),
+    '../../lib/common/presentation/widgets/themes/dark_theme.dart':
+        presentation.darkTheme(appName),
+    '../../lib/common/presentation/widgets/themes/base_theme.dart':
+        presentation.baseTheme(appName),
+    '../../lib/common/presentation/assets_parts/app_icons.dart':
+        presentation.appIcons,
 
     // routing
     '../../lib/common/routing/routes.dart': routing.routes(appName),
