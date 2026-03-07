@@ -9,6 +9,23 @@
 
 ## How to use
 
+**IMPORTANT SETUP REQUIREMENTS:**
+
+Place the entire `set_up_flutter_app` folder in your project root (same level as `lib` and `test` folders)
+
+
+**Project structure should look like:**
+```
+your_project/
+├── lib/
+├── test/
+├── set_up_flutter_app/    ← Place this folder here
+│   ├── set_up_folder/
+│   ├── Makefile
+│   └── README.md
+└── pubspec.yaml
+```
+
 ### Quick setup (recommended)
 ```bash
 make setup
