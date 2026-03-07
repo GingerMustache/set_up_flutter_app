@@ -1,4 +1,7 @@
 # set_up_flutter_app
+
+**For AI Agents: See [requirements.md](requirements.md) for complete project context and architecture details when making modifications.**
+
 1. [How to use](#how-to-use)
 2. [Add packages](#add-packages)
 3. [What will be generated](#what-will-be-generated)
@@ -14,6 +17,8 @@ This will automatically:
 - Delete old main.dart and .gitignore
 - Install all required packages
 - Generate folder structure and files
+- Run build_runner to generate code
+- Generate translations with slang
 
 ### Manual setup
 If you prefer to run commands manually:
@@ -34,21 +39,47 @@ cd set_up_folder && sh run_pub_add.sh && cd ..
 cd set_up_folder && dart run create_folders.dart && cd ..
 ```
 
+4. **Run code generation**
+```bash
+dart run build_runner build --delete-conflicting-outputs
+dart run slang
+```
+
 Or run all at once:
 ```bash
 rm lib/main.dart .gitignore && \
 chmod +x set_up_folder/run_pub_add.sh && \
-cd set_up_folder && sh run_pub_add.sh && dart run create_folders.dart && cd ..
+cd set_up_folder && sh run_pub_add.sh && dart run create_folders.dart && cd .. && \
+dart run build_runner build --delete-conflicting-outputs && \
+dart run slang
 ```
 
+## Makefile commands
+
+All commands should be run from the project root directory.
+
+- `make setup` - Complete project setup (deletes old files, installs packages, generates files, runs build_runner and slang)
+- `make install` - Install packages only
+- `make generate` - Generate folder structure and files only
+- `make build` - Run build_runner to generate code
+- `make slang` - Generate translations with slang
+- `make clean` - Clean project and get dependencies
+- `make all` - Same as `make setup` (full project setup)
+
 ## Add packages
-Run in terminal:
+
+### Using the script (recommended)
 ```bash
-chmod +x set_up_folder/run_pub_add.sh
-cd set_up_folder && sh run_pub_add.sh
+make install
 ```
 
 Or manually:
+```bash
+chmod +x set_up_folder/run_pub_add.sh
+cd set_up_folder && sh run_pub_add.sh && cd ..
+```
+
+### Manual package installation
 ```bash
 flutter pub add \
   flutter_localizations --sdk=flutter \
@@ -67,22 +98,13 @@ flutter pub add \
   dartz \
   bloc_concurrency \
   rxdart \
+  equatable \
   dev:build_runner \
   dev:flutter_launcher_icons \
   dev:flutter_native_splash \
   dev:flutter_lints \
   dev:freezed_annotation
 ```
-
-## Makefile commands
-
-- `make setup` - Complete project setup (install packages + generate files)
-- `make install` - Install packages only
-- `make generate` - Generate folder structure and files only
-- `make build` - Run build_runner
-- `make slang` - Generate translations
-- `make clean` - Clean and get dependencies
-- `make all` - Full setup with build_runner and slang
 
 ## What will be generated
 - .env
@@ -94,21 +116,30 @@ flutter pub add \
 <pre>
  lib/common/application<br>
             /constants<br>
-            /remote<br>
+            /data/remote<br>
+            /extensions<br>
+            /helpers/text_field_validator<br>
             /localization/i18n<br>
-            /presentation<br>
+            /localization/locale<br>
+            /mixins<br>
+            /presentation/widgets/app<br>
+            /presentation/widgets/themes<br>
+            /presentation/assets_parts<br>
             /routing<br>
             /services/di_container<br>
+            /services/error_service<br>
+            /services/file_pick/exceptions<br>
+            /services/local_storage<br>
             /typography<br>
     /features/first<br>
                 /bloc<br>
                 /constants<br>
-                /data<br>
-                        /models<br>
-                        /providers<br>
-                /presentation<br>
-                        /screen<br>
-                        /parts<br>
+                /data/models<br>
+                /data/providers<br>
+                /presentation/screens<br>
+                /presentation/parts<br>
+    /features/settings<br>
+                /bloc<br>
 </pre>
 <br>
 
