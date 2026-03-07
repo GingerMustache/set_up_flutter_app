@@ -7,6 +7,10 @@ setup:
 	@chmod +x set_up_folder/run_pub_add.sh
 	@cd set_up_folder && sh run_pub_add.sh
 	@cd set_up_folder && dart run create_folders.dart
+	@echo "Running build_runner..."
+	@dart run build_runner build --delete-conflicting-outputs
+	@echo "Generating translations..."
+	@dart run slang
 	@echo "Setup complete!"
 
 install:
