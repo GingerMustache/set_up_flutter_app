@@ -3,6 +3,8 @@ part of '../create_folders.dart';
 final class ServicesContent {
   String di(String appName) => '''
 import 'package:flutter/material.dart';
+import 'package:flutter_i18n/flutter_i18n_delegate.dart';
+import 'package:$appName/common/helpers/text_field_validator/text_field_validator.dart';
 import 'package:$appName/common/presentation/widgets/app/my_app.dart';
 import 'package:$appName/common/routing/routes.dart';
 import 'package:$appName/features/first/presentation/screens/init_screen.dart';
