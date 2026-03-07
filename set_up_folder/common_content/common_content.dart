@@ -67,7 +67,7 @@ input_directory: lib/common/localization/i18n
 ''';
 
   String main(String appName) => '''
-import 'package:$appName/common/di_container/di_container.dart';
+import 'package:$appName/common/services/di_container/di_container.dart';
 import 'package:$appName/common/helpers/text_field_validator/text_field_validator.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';
 import 'package:$appName/common/localization/locale/locale.dart';
