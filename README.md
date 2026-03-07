@@ -1,51 +1,88 @@
 # set_up_flutter_app
-1.[How to use](#how-to-use)
-<br>
-
-2.[Add packages](#add-packages)
-<br>
-
-3.[What will be generated](#what-will-be-generated)
-
+1. [How to use](#how-to-use)
+2. [Add packages](#add-packages)
+3. [What will be generated](#what-will-be-generated)
+4. [Makefile commands](#makefile-commands)
 
 ## How to use
-- add folder set_up_folder to main dir
-- delete main.dart, .gitignore
-- add packages ([Add packages](#add-packages))
-- run create_folder.dart file
+
+### Quick setup (recommended)
+```bash
+make setup
 ```
-dart run create_folders.dart
+This will automatically:
+- Delete old main.dart and .gitignore
+- Install all required packages
+- Generate folder structure and files
+
+### Manual setup
+If you prefer to run commands manually:
+
+1. **Delete old files**
+```bash
+rm lib/main.dart .gitignore
+```
+
+2. **Install packages**
+```bash
+chmod +x set_up_folder/run_pub_add.sh
+cd set_up_folder && sh run_pub_add.sh && cd ..
+```
+
+3. **Generate project structure**
+```bash
+cd set_up_folder && dart run create_folders.dart && cd ..
+```
+
+Or run all at once:
+```bash
+rm lib/main.dart .gitignore && \
+chmod +x set_up_folder/run_pub_add.sh && \
+cd set_up_folder && sh run_pub_add.sh && dart run create_folders.dart && cd ..
 ```
 
 ## Add packages
-- run in terminal
+Run in terminal:
+```bash
+chmod +x set_up_folder/run_pub_add.sh
+cd set_up_folder && sh run_pub_add.sh
 ```
-chmod +x run_pub_add.sh
-sh run_pub_add.sh
-```
-or 
 
+Or manually:
+```bash
+flutter pub add \
+  flutter_localizations --sdk=flutter \
+  intl:any \
+  slang \
+  slang_flutter \
+  go_router \
+  flutter_bloc \
+  bloc \
+  dio \
+  talker_dio_logger \
+  talker_flutter \
+  flutter_dotenv \
+  flutter_secure_storage \
+  freezed \
+  dartz \
+  bloc_concurrency \
+  rxdart \
+  dev:build_runner \
+  dev:flutter_launcher_icons \
+  dev:flutter_native_splash \
+  dev:flutter_lints \
+  dev:freezed_annotation
 ```
-flutter pub add 
-flutter_localizations --sdk=flutter
-intl:any
-slang 
-slang_flutter 
-go_router 
-flutter_bloc 
-bloc 
-dio 
-talker_dio_logger 
-talker_flutter 
-flutter_dotenv 
-flutter_secure_storage 
-freezed
 
-dev:build_runner 
-dev:flutter_launcher_icons
-dev:flutter_native_splash
-dev:flutter_lints 
-```
+## Makefile commands
+
+- `make setup` - Complete project setup (install packages + generate files)
+- `make install` - Install packages only
+- `make generate` - Generate folder structure and files only
+- `make build` - Run build_runner
+- `make slang` - Generate translations
+- `make clean` - Clean and get dependencies
+- `make all` - Full setup with build_runner and slang
 
 ## What will be generated
 - .env
