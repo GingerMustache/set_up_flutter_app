@@ -10,6 +10,7 @@
   flutter_bloc \
   bloc \
   dio \
+  equatable \
   talker_dio_logger \
   talker_flutter \
   flutter_dotenv \

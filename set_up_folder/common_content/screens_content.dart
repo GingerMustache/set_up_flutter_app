@@ -117,10 +117,6 @@ part 'settings_state.dart';
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final LocalStorageService _localStorage;
   List<String> get _settingItems => [
-    t.system.theme.all,
-    t.system.lang.all,
-    t.system.bright.all,
-    t.system.share.all,
     // 'Security',
     // 'Display',
     // 'Help & Support',
@@ -150,16 +146,11 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
             ? ThemeMode.dark
             : ThemeMode.light;
 
-    final currentBrightnessMode =
-        await _localStorage.read(SecureKeys.brightness.name) == 'handle'
-            ? BrightnessMode.handle
-            : BrightnessMode.auto;
 
     emit(
       state.copyWith(
         lang: currentLang,
         theme: currentTheme,
-        brightnessMode: currentBrightnessMode,
         settingItems: _settingItems,
       ),
     );
@@ -248,7 +239,8 @@ class SettingSearchEvent extends SettingsEvent {
 }
 ''';
 
-  String get settingsState => '''// ignore_for_file: public_member_api_docs, sort_constructors_first
+  String get settingsState =>
+      '''// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'settings_bloc.dart';
 
 @immutable
