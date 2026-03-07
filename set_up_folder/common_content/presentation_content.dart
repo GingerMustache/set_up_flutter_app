@@ -2,6 +2,7 @@ part of '../create_folders.dart';
 
 final class PresentationContent {
   String app(String appName) => '''
+import 'package:multi_mode_animated_snack/multi_mode_animated_snack.dart' show AnimatedSnackBar, AppearanceMode;
 import 'package:$appName/common/application/app_settings.dart';
 import 'package:$appName/common/constants/constants.dart';
 // need to run
