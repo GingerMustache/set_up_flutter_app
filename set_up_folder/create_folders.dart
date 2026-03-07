@@ -5,6 +5,7 @@ part 'common_content/application_content.dart';
 part 'common_content/common_content.dart';
 part 'common_content/constant_content.dart';
 part 'common_content/extensions_content.dart';
+part 'common_content/helpers_content.dart';
 part 'common_content/localization_content.dart';
 part 'common_content/mixins_content.dart';
 part 'common_content/presentation_content.dart';
@@ -43,6 +44,7 @@ void main() async {
     '../../lib/common/constants',
     '../../lib/common/data/remote',
     '../../lib/common/extensions',
+    '../../lib/common/helpers/text_field_validator',
     '../../lib/common/localization/i18n',
     '../../lib/common/mixins',
     '../../lib/common/presentation/widgets/app',
@@ -50,6 +52,9 @@ void main() async {
     '../../lib/common/presentation/assets_parts/',
     '../../lib/common/routing',
     '../../lib/common/services/di_container',
+    '../../lib/common/services/error_service',
+    '../../lib/common/services/file_pick/exceptions',
+    '../../lib/common/services/local_storage',
     '../../lib/common/typography',
     '../../lib/features/first/bloc',
     '../../lib/features/first/constants',
@@ -74,6 +79,7 @@ void main() async {
   final CommonContent common = CommonContent();
   final ConstantsContent constants = ConstantsContent();
   final ExtensionsContent extensions = ExtensionsContent();
+  final HelpersContent helpers = HelpersContent();
   final LocalizationContent localization = LocalizationContent();
   final MixinsContent mixins = MixinsContent();
   final PresentationContent presentation = PresentationContent();
@@ -107,6 +113,10 @@ void main() async {
     // extensions
     '../../lib/common/extensions/app_extensions.dart': extensions.appExtensions,
 
+    // helpers
+    '../../lib/common/helpers/text_field_validator/text_field_validator.dart':
+        helpers.textFieldValidator,
+
     // mixins
     '../../lib/common/mixins/error_handler_mixin.dart':
         mixins.errorHandlerMixin(appName),
@@ -135,6 +145,14 @@ void main() async {
     // services
     '../../lib/common/services/di_container/di_container.dart':
         services.di(appName),
+    '../../lib/common/services/error_service/error_service.dart':
+        services.errorService(appName),
+    '../../lib/common/services/file_pick/file_pick_service.dart':
+        services.filePickService(appName),
+    '../../lib/common/services/file_pick/exceptions/file_pick_service_exceptions.dart':
+        services.filePickServiceExceptions,
+    '../../lib/common/services/local_storage/secure_storage.dart':
+        services.secureStorage,
 
     // typography
     '../../lib/common/typography/typography.dart': '',

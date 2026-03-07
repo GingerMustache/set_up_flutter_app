@@ -67,18 +67,39 @@ input_directory: lib/common/localization/i18n
 ''';
 
   String main(String appName) => '''
-import 'package:flutter/material.dart';
-// need to run dart run build_runner build
+import 'package:$appName/common/di_container/di_container.dart';
+import 'package:$appName/common/helpers/text_field_validator/text_field_validator.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';
-import 'package:$appName/common/services/di_container/di_container.dart';
+import 'package:$appName/common/localization/locale/locale.dart';
+import 'package:$appName/common/services/error_service/error_service.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart'
+    show MultiBlocProvider, RepositoryProvider;
 
 void main() async {
-  final DiContainerProvider diContainer = DiContainer();
-  WidgetsFlutterBinding.ensureInitialized();
-  final app = diContainer.makeApp();
+  MainErrorService.instance.initialize();
 
-  runApp(TranslationProvider(child: app));
+  MainErrorService.instance.runGuarded(() async {
+    final DiContainerProvider diContainer = DiContainer();
+    final flutterI18nDelegate = await LocaleClass.initLocaleDelegate();
+    final app = diContainer.makeApp(flutterI18nDelegate);
+
+    runApp(
+      TranslationProvider(
+        child: MultiBlocProvider(
+          providers: [
+            RepositoryProvider<TextValidatorService>(
+              lazy: false,
+              create: (_) => diContainer.makeTextValidatorService(),
+            ),
+          ],
+          child: app,
+        ),
+      ),
+    );
+  });
 }
+
 ''';
 
   String get flutterLauncherIcons => '''
