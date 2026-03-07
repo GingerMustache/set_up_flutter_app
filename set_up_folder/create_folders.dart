@@ -46,6 +46,7 @@ void main() async {
     '../../lib/common/extensions',
     '../../lib/common/helpers/text_field_validator',
     '../../lib/common/localization/i18n',
+    '../../lib/common/localization/locale',
     '../../lib/common/mixins',
     '../../lib/common/presentation/widgets/app',
     '../../lib/common/presentation/widgets/themes',
@@ -124,8 +125,9 @@ void main() async {
         mixins.eventTransformerMixin,
 
     // localization
-    '../../lib/common/localization/i18n/strings_en.i18n.yaml':
-        localization.string,
+    '../../lib/common/localization/i18n/en.i18n.yaml': localization.string,
+    '../../lib/common/localization/locale/locale.dart':
+        localization.locale(appName),
 
     // presentation
     '../../lib/common/presentation/widgets/app/my_app.dart':
