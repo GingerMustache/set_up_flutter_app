@@ -1,13 +1,12 @@
 part of '../create_folders.dart';
 
 class ConfigsContent {
-  String settingConfig(String appName) => '''import 'package:$appName/common/services/brightness_control/brightness_control_service.dart';
+  String settingConfig(String appName) => '''
 import 'package:$appName/common/services/local_storage/secure_storage.dart';
 import 'package:flutter/material.dart';
 
 abstract class SettingConfig {
   ThemeMode get currentTheme;
-  BrightnessMode get currentBrightness;
   String get currentLang;
 }
 
@@ -15,13 +14,12 @@ class SettingConfigImpl implements SettingConfig {
   @override
   final ThemeMode currentTheme;
   @override
-  final BrightnessMode currentBrightness;
+
   @override
   final String currentLang;
 
   SettingConfigImpl({
     required this.currentTheme,
-    required this.currentBrightness,
     required this.currentLang,
   });
 
@@ -38,14 +36,8 @@ class SettingConfigImpl implements SettingConfig {
             ? ThemeMode.dark
             : ThemeMode.light;
 
-    final currentBrightnessMode =
-        await localStorage.read(SecureKeys.brightness.name) == 'handle'
-            ? BrightnessMode.handle
-            : BrightnessMode.auto;
-
     return SettingConfigImpl(
       currentTheme: currentThemeMode,
-      currentBrightness: currentBrightnessMode,
       currentLang: currentLangMode,
     );
   }

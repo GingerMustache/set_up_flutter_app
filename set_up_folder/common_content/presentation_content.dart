@@ -30,6 +30,7 @@ abstract class MyAppNavigation {
 class MyApp extends StatelessWidget {
   final MyAppNavigation navigation;
   final SettingConfig settingConfig;
+  final FlutterI18nDelegate flutterI18nDelegate;
 
   const MyApp({
     super.key,

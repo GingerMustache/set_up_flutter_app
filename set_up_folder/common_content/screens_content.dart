@@ -105,9 +105,11 @@ class InitScreenState extends State<InitScreen> {
 ''';
 
   String settingsBloc(String appName) => '''import 'package:bloc/bloc.dart';
-import 'package:$appName/common/localization/i18n/strings.g.dart';
-import 'package:$appName/common/services/local_storage/secure_storage.dart';
+import 'package:bloc/bloc.dart';
 import 'package:$appName/common/configs/setting_config.dart';
+import 'package:$appName/common/localization/i18n/strings.g.dart';
+import 'package:$appName/common/services/brightness_control/brightness_control_service.dart';
+import 'package:$appName/common/services/local_storage/secure_storage.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -125,33 +127,24 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     // 'Logout',
   ];
 
-  SettingsBloc({required LocalStorageService localStorage})
-    : _localStorage = localStorage,
+  SettingsBloc({
+    required LocalStorageService localStorage,
+    required SettingConfig settingConfig
+  }) : _localStorage = localStorage, _settingConfig = settingConfig,
 
-      super(SettingsState()) {
+       super(SettingsState()) {
     on<SettingChangeLangEvent>(_onChangeLang);
     on<SettingChangeThemeEvent>(_onChangeTheme);
     on<SettingInitEvent>(_onInit);
     on<SettingSearchEvent>(_onSettingSearch);
-   
   }
 
   _onInit(SettingInitEvent event, Emitter<SettingsState> emit) async {
-    final currentLang = await _localStorage.read(
-      SecureKeys.lang.name,
-      insteadValue: 'ru',
-    );
-
-    final currentTheme =
-        await _localStorage.read(SecureKeys.theme.name) == 'dark'
-            ? ThemeMode.dark
-            : ThemeMode.light;
-
-
     emit(
       state.copyWith(
-        lang: currentLang,
-        theme: currentTheme,
+        startApp: true,
+        lang: _settingConfig.currentLang,
+        theme: _settingConfig.currentTheme,
         settingItems: _settingItems,
       ),
     );
