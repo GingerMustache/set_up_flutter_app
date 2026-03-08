@@ -74,8 +74,9 @@ import 'package:$appName/common/localization/i18n/strings.g.dart';
 import 'package:$appName/common/localization/locale/locale.dart';
 import 'package:$appName/common/services/error_service/error_service.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart'
-    show MultiBlocProvider, RepositoryProvider;
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'features/settings/bloc/settings_bloc.dart';
 
 void main() async {
   MainErrorService.instance.initialize();
