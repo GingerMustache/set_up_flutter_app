@@ -108,7 +108,6 @@ class InitScreenState extends State<InitScreen> {
 import 'package:bloc/bloc.dart';
 import 'package:$appName/common/configs/setting_config.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';
-import 'package:$appName/common/services/brightness_control/brightness_control_service.dart';
 import 'package:$appName/common/services/local_storage/secure_storage.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
