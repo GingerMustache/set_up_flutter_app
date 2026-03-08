@@ -3,6 +3,7 @@ import 'dart:io';
 
 part 'common_content/application_content.dart';
 part 'common_content/common_content.dart';
+part 'common_content/configs_content.dart';
 part 'common_content/constant_content.dart';
 part 'common_content/extensions_content.dart';
 part 'common_content/helpers_content.dart';
@@ -41,6 +42,7 @@ void main() async {
 
   List<String> folders = [
     '../../lib/common/application',
+    '../../lib/common/configs',
     '../../lib/common/constants',
     '../../lib/common/data/remote',
     '../../lib/common/extensions',
@@ -79,6 +81,7 @@ void main() async {
 
   final ApplicationContent application = ApplicationContent();
   final CommonContent common = CommonContent();
+  final ConfigsContent configs = ConfigsContent();
   final ConstantsContent constants = ConstantsContent();
   final ExtensionsContent extensions = ExtensionsContent();
   final HelpersContent helpers = HelpersContent();
@@ -105,6 +108,9 @@ void main() async {
     '../../lib/common/application/button_styles.dart': application.part,
     '../../lib/common/application/decoration.dart': application.part,
     '../../lib/common/application/paddings.dart': application.part,
+
+    // configs
+    '../../lib/common/configs/setting_config.dart': configs.settingConfig(appName),
 
     // constants
     '../../lib/common/constants/constants.dart': constants.constants,

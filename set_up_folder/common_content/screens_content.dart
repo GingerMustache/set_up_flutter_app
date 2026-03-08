@@ -107,6 +107,7 @@ class InitScreenState extends State<InitScreen> {
   String settingsBloc(String appName) => '''import 'package:bloc/bloc.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';
 import 'package:$appName/common/services/local_storage/secure_storage.dart';
+import 'package:$appName/common/configs/setting_config.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
@@ -115,6 +116,7 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final LocalStorageService _localStorage;
+  final SettingConfig _settingConfig;
   List<String> get _settingItems => [
     // 'Security',
     // 'Display',

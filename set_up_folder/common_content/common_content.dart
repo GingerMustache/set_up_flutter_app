@@ -68,6 +68,7 @@ input_directory: lib/common/localization/i18n
 
   String main(String appName) => '''
 import 'package:$appName/common/services/di_container/di_container.dart';
+import 'package:$appName/common/configs/setting_config.dart';
 import 'package:$appName/common/helpers/text_field_validator/text_field_validator.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';
 import 'package:$appName/common/localization/locale/locale.dart';
@@ -81,13 +82,23 @@ void main() async {
 
   MainErrorService.instance.runGuarded(() async {
     final DiContainerProvider diContainer = DiContainer();
+    final SettingConfig settingConfig = await diContainer.makeSettingConfig();
     final flutterI18nDelegate = await LocaleClass.initLocaleDelegate();
-    final app = diContainer.makeApp(flutterI18nDelegate);
+
+    final app = diContainer.makeApp(flutterI18nDelegate, settingConfig);
 
     runApp(
       TranslationProvider(
         child: MultiBlocProvider(
           providers: [
+            BlocProvider(
+              create:
+                  (context) => SettingsBloc(
+                    localStorage: diContainer.makeLocalStorage(),
+                    settingConfig: settingConfig,
+                  )..add(SettingInitEvent()),
+              lazy: false,
+            ),          
             RepositoryProvider<TextValidatorService>(
               lazy: false,
               create: (_) => diContainer.makeTextValidatorService(),

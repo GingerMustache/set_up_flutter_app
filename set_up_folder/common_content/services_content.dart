@@ -8,9 +8,11 @@ import 'package:$appName/common/helpers/text_field_validator/text_field_validato
 import 'package:$appName/common/presentation/widgets/app/my_app.dart';
 import 'package:$appName/common/routing/routes.dart';
 import 'package:$appName/features/first/presentation/screens/init_screen.dart';
+import 'package:$appName/common/configs/setting_config.dart';
 
 abstract class DiContainerProvider {
-  Widget makeApp(FlutterI18nDelegate flutterI18nDelegate);
+  Widget makeApp(FlutterI18nDelegate flutterI18nDelegate,SettingConfig settingConfig,);
+  Future<SettingConfig> makeSettingConfig();
   TextValidatorService makeTextValidatorService();
 }
 
@@ -22,11 +24,19 @@ class DiContainer implements DiContainerProvider {
   @override
   TextValidatorService makeTextValidatorService() => TextValidatorService();
   @override
-  Widget makeApp(FlutterI18nDelegate flutterI18nDelegate) => MyApp(
+  Widget makeApp(
+    FlutterI18nDelegate flutterI18nDelegate,
+    SettingConfig settingConfig,
+  ) => MyApp(
     navigation: _makeRouter(),
     flutterI18nDelegate: flutterI18nDelegate,
+    settingConfig: settingConfig,
   );
   CheckAuthorization makeCheckAuthorization() => CheckAuthorizationDefault();
+
+  @override
+  Future<SettingConfig> makeSettingConfig() async =>
+      SettingConfigImpl.fromLocalStorage(makeLocalStorage());
 
   DiContainer();
 }
