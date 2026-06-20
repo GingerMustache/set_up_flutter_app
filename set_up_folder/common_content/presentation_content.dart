@@ -1,9 +1,9 @@
 part of '../create_folders.dart';
 
 final class PresentationContent {
-  String app(String appName) => '''
+  String app(String appName) =>
+      '''
 import 'package:multi_mode_animated_snack/multi_mode_animated_snack.dart' show AnimatedSnackBar, AppearanceMode;
-import 'package:$appName/common/application/app_settings.dart';
 import 'package:$appName/common/configs/setting_config.dart';
 import 'package:$appName/common/constants/constants.dart';
 import 'package:$appName/features/settings/bloc/settings_bloc.dart';
@@ -12,7 +12,8 @@ import 'package:$appName/features/settings/bloc/settings_bloc.dart';
 // dart run slang
 import 'package:$appName/common/localization/i18n/strings.g.dart';
 
-import 'package:$appName/common/presentation/widgets/themes/base_theme.dart'
+import 'package:$appName/common/application/theme/color/theme_color.dart';
+import 'package:$appName/common/presentation/widgets/app/themes/base_theme.dart'
     show AppTheme;
 
 import 'package:flutter/material.dart';
@@ -41,16 +42,16 @@ class MyApp extends StatelessWidget {
 
   void systemColor(ThemeMode theme) {
     final isDark = theme == ThemeMode.dark;
+    final colors = isDark ? ThemeColors.dark : ThemeColors.light;
 
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
-        statusBarColor: isDark ? AppColors.mainBlack : AppColors.mainWhite,
+        statusBarColor: colors.scaffoldBackground,
         statusBarIconBrightness: isDark ? Brightness.light : Brightness.dark,
         statusBarBrightness: isDark ? Brightness.light : Brightness.dark,
         systemNavigationBarIconBrightness:
             isDark ? Brightness.light : Brightness.dark,
-        systemNavigationBarColor:
-            isDark ? AppColors.mainBlack : AppColors.mainWhite,
+        systemNavigationBarColor: colors.navigationBar,
       ),
     );
   }
@@ -129,209 +130,68 @@ class MyApp extends StatelessWidget {
 }
 ''';
 
-  String lightTheme(String appName) =>
-      '''import 'package:$appName/common/application/app_settings.dart';
-import 'package:flutter/material.dart';
+  String get lightTheme => '''
+part of 'base_theme.dart';
 
-TextStyle _getTextStyleFromTheme({
-  double? fontSize,
-  FontWeight? fontWeight,
-  double? height,
-  Color? color,
-  double? letterSpacing,
-}) {
-  return TextStyle(
-    fontSize: fontSize,
-    fontWeight: fontWeight,
-    letterSpacing: letterSpacing,
-    height: height,
-    color: color ?? AppColors.mainBlack,
-  );
-}
+const _lightColors = ThemeColors.light;
 
-const Color lightSecondaryColor = Color(0xFFc7513b);
-const Color lightOnPrimaryColor = Colors.black;
-
-final ThemeData lightTheme = ThemeData(
+final lightThemeData = ThemeData(
   brightness: Brightness.light,
-  scaffoldBackgroundColor: AppColors.mainWhite,
   useMaterial3: true,
   fontFamily: 'Tektur',
-  indicatorColor: AppColors.mainBlack,
-  iconTheme: const IconThemeData(color: AppColors.mainBlack),
-  appBarTheme: const AppBarTheme(
-    titleTextStyle: TextStyle(color: Colors.white, fontSize: 18.0),
-    color: AppColors.mainWhite,
-  ),
-  colorScheme: const ColorScheme.light(
-    primary: AppColors.mainGray,
-    secondary: lightSecondaryColor,
-    onPrimary: lightOnPrimaryColor,
-    onSecondary: Colors.white,
-    surfaceContainerHighest: AppColors.mainBlack,
-    surface: Colors.white,
-    secondaryContainer: Color.fromARGB(255, 255, 206, 191),
-  ),
-  textTheme: TextTheme(
-    displayMedium: _getTextStyleFromTheme(
-      fontSize: 20.0,
-      letterSpacing: 2.5,
-      color: AppColors.darkGrey,
-      fontWeight: FontWeight.bold,
-    ),
-    headlineLarge: _getTextStyleFromTheme(
-      fontSize: 32.0,
-      fontWeight: FontWeight.w500,
-    ),
-    headlineMedium: _getTextStyleFromTheme(
-      fontSize: 22.0,
-      color: AppColors.mainBlack,
-      fontWeight: FontWeight.w500,
-    ),
-    headlineSmall: _getTextStyleFromTheme(
+  scaffoldBackgroundColor: _lightColors.scaffoldBackground,
+  indicatorColor: _lightColors.indicator,
+  iconTheme: IconThemeData(color: _lightColors.icon),
+  appBarTheme: AppBarTheme(
+    color: _lightColors.appBarBackground,
+    titleTextStyle: TextStyle(
+      color: _lightColors.appBarTitle,
       fontSize: 18.0,
-      color: AppColors.mainBlack,
-      fontWeight: FontWeight.w500,
-    ),
-    titleLarge: _getTextStyleFromTheme(
-      fontSize: 20.0,
-      fontWeight: FontWeight.w400,
-    ),
-    titleMedium: _getTextStyleFromTheme(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-    ),
-    titleSmall: _getTextStyleFromTheme(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w400,
-    ),
-    bodyMedium: _getTextStyleFromTheme(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.darkGrey,
-    ),
-    bodySmall: _getTextStyleFromTheme(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.subGrey,
-    ),
-    displaySmall: _getTextStyleFromTheme(
-      fontSize: 16.0,
-      color: AppColors.darkGrey,
-      fontWeight: FontWeight.w600,
-    ),
-    labelSmall: _getTextStyleFromTheme(
-      fontSize: 12.0,
-      fontWeight: FontWeight.w400,
     ),
   ),
+  extensions: [ThemeTextStyles.light, _lightColors],
 );
 ''';
 
-  String darkTheme(String appName) =>
-      '''import 'package:$appName/common/application/app_settings.dart';
-import 'package:flutter/material.dart';
+  String get darkTheme => '''
+part of 'base_theme.dart';
 
-TextStyle _getTextStyleFromTheme({
-  double? fontSize,
-  FontWeight? fontWeight,
-  double? height,
-  Color? color,
-  double? letterSpacing,
-}) {
-  return TextStyle(
-    fontSize: fontSize,
-    fontWeight: fontWeight,
-    letterSpacing: letterSpacing,
-    height: height,
-    color: color ?? AppColors.mainBlack,
-  );
-}
+const _darkColors = ThemeColors.dark;
 
-const Color darkPrimaryColor = Color.fromARGB(255, 75, 14, 0);
-const Color darkSecondaryColor = Color.fromARGB(255, 107, 16, 0);
-
-final ThemeData darkTheme = ThemeData(
+final darkThemeData = ThemeData(
   brightness: Brightness.dark,
-  scaffoldBackgroundColor: const Color.fromARGB(255, 67, 67, 67),
   useMaterial3: true,
   fontFamily: 'Tektur',
-  indicatorColor: AppColors.mainBlue,
-  iconTheme: const IconThemeData(color: AppColors.darkGrey),
-  appBarTheme: const AppBarTheme(
-    titleTextStyle: TextStyle(color: AppColors.darkGrey, fontSize: 18.0),
-    color: darkPrimaryColor,
-    iconTheme: IconThemeData(color: AppColors.darkGrey),
-  ),
-  colorScheme: const ColorScheme.dark(
-    primary: AppColors.suBlack,
-    secondary: darkSecondaryColor,
-    onPrimary: Colors.green,
-    onSecondary: Colors.red,
-    surfaceContainerHighest: Color.fromARGB(255, 252, 210, 210),
-    surface: Color.fromARGB(255, 88, 47, 47),
-    secondaryContainer: Color.fromARGB(255, 36, 20, 20),
-  ),
-  textTheme: TextTheme(
-    displayMedium: _getTextStyleFromTheme(
-      fontSize: 20.0,
-      letterSpacing: 2,
-      fontWeight: FontWeight.bold,
-    ),
-    headlineMedium: _getTextStyleFromTheme(
-      fontSize: 22.0,
-      fontWeight: FontWeight.w500,
-    ),
-    headlineSmall: _getTextStyleFromTheme(
+  scaffoldBackgroundColor: _darkColors.scaffoldBackground,
+  indicatorColor: _darkColors.indicator,
+  iconTheme: IconThemeData(color: _darkColors.icon),
+  appBarTheme: AppBarTheme(
+    color: _darkColors.appBarBackground,
+    titleTextStyle: TextStyle(
+      color: _darkColors.appBarTitle,
       fontSize: 18.0,
-      fontWeight: FontWeight.w500,
     ),
-    titleLarge: _getTextStyleFromTheme(
-      fontSize: 20.0,
-      fontWeight: FontWeight.w400,
-    ),
-    titleMedium: _getTextStyleFromTheme(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-    ),
-    titleSmall: _getTextStyleFromTheme(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.mainGray,
-    ),
-    bodyMedium: _getTextStyleFromTheme(
-      fontSize: 18.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.darkGrey,
-    ),
-    bodySmall: _getTextStyleFromTheme(
-      fontSize: 16.0,
-      fontWeight: FontWeight.w400,
-      color: AppColors.darkGrey,
-    ),
-    displaySmall: _getTextStyleFromTheme(
-      fontSize: 16.0,
-      color: AppColors.darkGrey,
-      fontWeight: FontWeight.w600,
-    ),
-    labelSmall: _getTextStyleFromTheme(
-      fontSize: 12.0,
-      fontWeight: FontWeight.w400,
-    ),
+    iconTheme: IconThemeData(color: _darkColors.icon),
   ),
+  extensions: [ThemeTextStyles.dark, _darkColors],
 );
 ''';
 
   String baseTheme(String appName) =>
-      '''import 'package:$appName/common/presentation/widgets/themes/dark_theme.dart';
-import 'package:$appName/common/presentation/widgets/themes/light_theme.dart';
+      '''
+import 'package:$appName/common/application/theme/color/theme_color.dart';
+import 'package:$appName/common/application/theme/text_style/theme_text_style.dart';
 import 'package:flutter/material.dart';
 
+part 'dark_theme.dart';
+part 'light_theme.dart';
+
+/// Facade for light and dark [ThemeData] presets.
 class AppTheme {
   AppTheme._();
 
-  static final ThemeData lightTheme = lightTheme;
-  static final ThemeData darkTheme = darkTheme;
+  static final ThemeData lightTheme = lightThemeData;
+  static final ThemeData darkTheme = darkThemeData;
 }
 ''';
 }

@@ -42,15 +42,16 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: Center(child: Text('HomeScreen')),
     );
   }
 }
 ''';
-  String initScreen(String appName) => '''
+  String initScreen(String appName) =>
+      '''
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:$appName/common/application/app_settings.dart';
+import 'package:$appName/common/application/theme/color/theme_color.dart';
 import 'package:$appName/common/routing/routes.dart';
 
 abstract interface class CheckAuthorization {
@@ -92,9 +93,10 @@ class InitScreenState extends State<InitScreen> {
         builder: (context, AsyncSnapshot<bool> snapshot) => Stack(
           children: [
             Container(
-                decoration: const BoxDecoration(
-              color: AppColors.mainBlack,
-            )),
+              decoration: BoxDecoration(
+                color: context.color.scaffoldBackground,
+              ),
+            ),
             const Center(
               child: CircularProgressIndicator(),
             ),
@@ -104,7 +106,8 @@ class InitScreenState extends State<InitScreen> {
       }
 ''';
 
-  String settingsBloc(String appName) => '''import 'package:bloc/bloc.dart';
+  String settingsBloc(String appName) =>
+      '''import 'package:bloc/bloc.dart';
 import 'package:bloc/bloc.dart';
 import 'package:$appName/common/configs/setting_config.dart';
 import 'package:$appName/common/localization/i18n/strings.g.dart';

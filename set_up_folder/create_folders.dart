@@ -12,6 +12,7 @@ part 'common_content/mixins_content.dart';
 part 'common_content/presentation_content.dart';
 part 'common_content/routing_content.dart';
 part 'common_content/screens_content.dart';
+part 'common_content/theme_content.dart';
 part 'common_content/services_content.dart';
 
 Future<String> getAppName() async {
@@ -37,6 +38,55 @@ Future<String> getAppName() async {
   return 'app_name';
 }
 
+/// Ensures `.env` is listed under `flutter.assets` in pubspec.yaml.
+Future<void> ensureEnvAssetInPubspec() async {
+  const pubspecPath = '../../pubspec.yaml';
+  final file = File(pubspecPath);
+
+  if (!file.existsSync()) {
+    print('pubspec.yaml not found — skipping assets update');
+    return;
+  }
+
+  var content = await file.readAsString();
+
+  if (RegExp(r'^\s*-\s*\.env\s*$', multiLine: true).hasMatch(content)) {
+    print('.env asset already in pubspec.yaml');
+    return;
+  }
+
+  const assetsWithEnv = '''  assets:
+    - .env
+  # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
+''';
+
+  final commentedAssetsBlock = RegExp(
+    r'  # To add assets to your application, add an assets section, like this:\r?\n'
+    r'  # assets:\r?\n'
+    r'(?:  #   - .+\r?\n)+',
+  );
+
+  if (commentedAssetsBlock.hasMatch(content)) {
+    content = content.replaceFirst(commentedAssetsBlock, assetsWithEnv);
+  } else if (RegExp(r'\n  assets:\n').hasMatch(content)) {
+    content = content.replaceFirst(
+      RegExp(r'\n  assets:\n'),
+      '\n  assets:\n    - .env\n',
+    );
+  } else {
+    print(
+      'Could not update pubspec.yaml — add assets with .env under flutter manually',
+    );
+    return;
+  }
+
+  await file.writeAsString(content);
+  print('Added .env to pubspec.yaml assets');
+}
+
 void main() async {
   final String appName = await getAppName();
 
@@ -50,15 +100,16 @@ void main() async {
     '../../lib/common/localization/i18n',
     '../../lib/common/localization/locale',
     '../../lib/common/mixins',
+    '../../lib/common/application/theme/text_style',
+    '../../lib/common/application/theme/color',
     '../../lib/common/presentation/widgets/app',
-    '../../lib/common/presentation/widgets/themes',
+    '../../lib/common/presentation/widgets/app/themes',
     '../../lib/common/presentation/assets_parts/',
     '../../lib/common/routing',
     '../../lib/common/services/di_container',
     '../../lib/common/services/error_service',
     '../../lib/common/services/file_pick/exceptions',
     '../../lib/common/services/local_storage',
-    '../../lib/common/typography',
     '../../lib/features/first/bloc',
     '../../lib/features/first/constants',
     '../../lib/features/first/data/models',
@@ -89,12 +140,13 @@ void main() async {
   final MixinsContent mixins = MixinsContent();
   final PresentationContent presentation = PresentationContent();
   final RoutingContent routing = RoutingContent();
+  final ThemeContent theme = ThemeContent();
   final ServicesContent services = ServicesContent();
   final ScreensContent screens = ScreensContent();
 
   Map<String, String> files = {
     // common
-    '../../.env': 'URL=',
+    '../../.env': 'URL=\nSENTRY_DSN=',
     '../../slang.yaml': common.slang,
     '../../.gitignore': common.gitignore,
     '../../flutter_launcher_icons.yaml': common.flutterLauncherIcons,
@@ -103,19 +155,29 @@ void main() async {
     // application
     '../../lib/common/application/app_settings.dart': application.appSettings,
     '../../lib/common/application/colors.dart': application.colors,
-    '../../lib/common/application/text_styles.dart': application.textStyles,
     '../../lib/common/application/links.dart': application.links,
     '../../lib/common/application/button_styles.dart': application.part,
     '../../lib/common/application/decoration.dart': application.part,
     '../../lib/common/application/paddings.dart': application.part,
 
+    // theme tokens
+    '../../lib/common/application/theme/text_style/theme_text_style.dart': theme
+        .themeTextStyle(appName),
+    '../../lib/common/application/theme/text_style/theme_text_style_extension.dart':
+        theme.themeTextStyleExtension,
+    '../../lib/common/application/theme/color/theme_color.dart': theme
+        .themeColor(appName),
+    '../../lib/common/application/theme/color/theme_color_extension.dart':
+        theme.themeColorExtension,
+
     // configs
-    '../../lib/common/configs/setting_config.dart': configs.settingConfig(appName),
+    '../../lib/common/configs/setting_config.dart': configs.settingConfig(
+      appName,
+    ),
 
     // constants
     '../../lib/common/constants/constants.dart': constants.constants,
     '../../lib/common/constants/global.dart': constants.global,
-    '../../lib/common/constants/snacks.dart': constants.snacks,
     '../../lib/common/constants/spaces.dart': constants.spaces,
 
     // extensions
@@ -124,28 +186,33 @@ void main() async {
     // helpers
     '../../lib/common/helpers/text_field_validator/text_field_validator.dart':
         helpers.textFieldValidator,
+    '../../lib/common/helpers/json_parser.dart': helpers.jsonParser,
 
     // mixins
-    '../../lib/common/mixins/error_handler_mixin.dart':
-        mixins.errorHandlerMixin(appName),
+    '../../lib/common/mixins/error_handler_mixin.dart': mixins
+        .errorHandlerMixin(appName),
     '../../lib/common/mixins/event_transformer_mixin.dart':
         mixins.eventTransformerMixin,
+    '../../lib/common/mixins/show_snack_bar_mixin.dart':
+        mixins.showSnackBarMixin,
 
     // localization
     '../../lib/common/localization/i18n/en.i18n.yaml': localization.stringEn,
     '../../lib/common/localization/i18n/ru.i18n.yaml': localization.stringRu,
-    '../../lib/common/localization/locale/locale.dart':
-        localization.locale(appName),
+    '../../lib/common/localization/locale/locale.dart': localization.locale(
+      appName,
+    ),
 
     // presentation
-    '../../lib/common/presentation/widgets/app/my_app.dart':
-        presentation.app(appName),
-    '../../lib/common/presentation/widgets/themes/light_theme.dart':
-        presentation.lightTheme(appName),
-    '../../lib/common/presentation/widgets/themes/dark_theme.dart':
-        presentation.darkTheme(appName),
-    '../../lib/common/presentation/widgets/themes/base_theme.dart':
+    '../../lib/common/presentation/widgets/app/my_app.dart': presentation.app(
+      appName,
+    ),
+    '../../lib/common/presentation/widgets/app/themes/base_theme.dart':
         presentation.baseTheme(appName),
+    '../../lib/common/presentation/widgets/app/themes/light_theme.dart':
+        presentation.lightTheme,
+    '../../lib/common/presentation/widgets/app/themes/dark_theme.dart':
+        presentation.darkTheme,
     '../../lib/common/presentation/assets_parts/app_icons.dart':
         presentation.appIcons,
 
@@ -153,19 +220,17 @@ void main() async {
     '../../lib/common/routing/routes.dart': routing.routes(appName),
 
     // services
-    '../../lib/common/services/di_container/di_container.dart':
-        services.di(appName),
-    '../../lib/common/services/error_service/error_service.dart':
-        services.errorService(appName),
-    '../../lib/common/services/file_pick/file_pick_service.dart':
-        services.filePickService(appName),
+    '../../lib/common/services/di_container/di_container.dart': services.di(
+      appName,
+    ),
+    '../../lib/common/services/error_service/error_service.dart': services
+        .errorService(appName),
+    '../../lib/common/services/file_pick/file_pick_service.dart': services
+        .filePickService(appName),
     '../../lib/common/services/file_pick/exceptions/file_pick_service_exceptions.dart':
         services.filePickServiceExceptions,
     '../../lib/common/services/local_storage/secure_storage.dart':
         services.secureStorage,
-
-    // typography
-    '../../lib/common/typography/typography.dart': '',
 
     // screens/presentation
     '../../lib/features/first/presentation/screens/home_screen.dart':
@@ -176,28 +241,35 @@ void main() async {
     '../../lib/features/first/bloc/init_screen_event.dart': screens.event,
     '../../lib/features/first/bloc/init_screen_state.dart': screens.state,
 
-    '../../lib/features/first/presentation/screens/init_screen.dart':
-        screens.initScreen(appName),
+    '../../lib/features/first/presentation/screens/init_screen.dart': screens
+        .initScreen(appName),
 
     // settings/bloc
-    '../../lib/features/settings/bloc/settings_bloc.dart':
-        screens.settingsBloc(appName),
+    '../../lib/features/settings/bloc/settings_bloc.dart': screens.settingsBloc(
+      appName,
+    ),
     '../../lib/features/settings/bloc/settings_event.dart':
         screens.settingsEvent,
     '../../lib/features/settings/bloc/settings_state.dart':
         screens.settingsState,
   };
 
-  files.map(
-    (key, value) {
-      final file = File(key);
-      if (!file.existsSync()) {
-        file.writeAsStringSync(value);
-        print('Created: $key');
-      } else {
-        print('Already exists: $key');
-      }
-      return MapEntry(key, value);
-    },
-  );
+  final themeArchitectureFile = File('../THEME_ARCHITECTURE.md');
+  if (themeArchitectureFile.existsSync()) {
+    files['../../lib/common/application/theme/THEME_ARCHITECTURE.md'] =
+        themeArchitectureFile.readAsStringSync();
+  }
+
+  files.map((key, value) {
+    final file = File(key);
+    if (!file.existsSync()) {
+      file.writeAsStringSync(value);
+      print('Created: $key');
+    } else {
+      print('Already exists: $key');
+    }
+    return MapEntry(key, value);
+  });
+
+  await ensureEnvAssetInPubspec();
 }

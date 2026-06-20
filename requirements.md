@@ -16,6 +16,9 @@ This is a Flutter project setup automation tool that generates a standardized pr
 ```
 lib/common/
 ├── application/          # App-wide settings, colors, text styles, links
+│   └── theme/            # Theme-aware design tokens (ThemeExtension)
+│       ├── text_style/   # ThemeTextStyles tokens
+│       └── color/        # ThemeColors tokens
 ├── constants/           # Global constants, snacks, spaces
 ├── data/remote/         # Remote data sources
 ├── extensions/          # Dart extensions
@@ -24,7 +27,7 @@ lib/common/
 ├── mixins/              # Reusable mixins (error handler, event transformer)
 ├── presentation/        # UI components
 │   ├── widgets/app/     # App-level widgets (MyApp)
-│   ├── widgets/themes/  # Theme configurations (light, dark, base)
+│   │   └── themes/      # Theme configurations (light, dark, base)
 │   └── assets_parts/    # Asset references (icons)
 ├── routing/             # Navigation and routing
 ├── services/            # Services layer
@@ -102,17 +105,23 @@ Generates service layer files:
 ### ApplicationContent
 Generates application-level configurations:
 - App settings
-- Colors
-- Text styles
+- Colors (raw palette — `AppColors`)
+- Text styles (legacy helpers in app_settings)
 - Links
 - Button styles
 - Decorations
 - Paddings
 
+### ThemeContent
+Generates the three-layer theme system (see `THEME_ARCHITECTURE.md`):
+- `ThemeTextStyles` — typography tokens via `ThemeExtension`
+- `ThemeColors` — semantic color tokens via `ThemeExtension`
+- `context.textStyles` / `context.color` accessors in part files
+
 ### PresentationContent
 Generates UI components:
 - MyApp widget
-- Theme configurations (light, dark, base)
+- Theme configurations (`base_theme.dart` library with light/dark parts)
 - App icons
 
 ### RoutingContent
@@ -182,3 +191,4 @@ make setup
 2. Secure storage service with platform-specific configurations
 3. Automated folder and file generation system
 4. Content generator classes for consistent code structure
+5. Three-layer theme architecture (`AppColors` → `ThemeExtension` tokens → `AppTheme`)
